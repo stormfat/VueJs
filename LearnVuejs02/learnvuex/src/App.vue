@@ -15,6 +15,7 @@
         <button @click="addStu">mutation常规方法添加学生</button>
         <button @click="addStuType">mutation特殊方法添加学生</button>
         <button @click="updateInfo">更新信息</button>
+        <button @click="asyncUpdateInfo">异步更新信息</button>
         <hellow-vuex />
         <router-view />
     </div>
@@ -22,7 +23,7 @@
 
 <script>
 import HellowVuex from '@/components/HellowVuex';
-import { INCREMENT, DECREMENT, ADDCOUNTE, ADDSTU, ADDSTUTYPE, UPDATEINFO } from '@/store/mutations-types';
+import { INCREMENT, DECREMENT, ADDCOUNTE, ADDSTU, ADDSTUTYPE, UPDATEINFO, AUPDATEINFO } from '@/store/mutations-types';
 
 export default {
     name: 'App',
@@ -55,6 +56,12 @@ export default {
         },
         updateInfo() {
             this.$store.commit(UPDATEINFO);
+        },
+        asyncUpdateInfo() {
+            this.$store.dispatch(AUPDATEINFO, '需要提交的数据').then(res => {
+                console.log('数据提交已完成');
+                console.log(res);
+            });
         }
     }
 };

@@ -1,11 +1,21 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { INCREMENT, DECREMENT, ADDCOUNTE, ADDSTU, ADDSTUTYPE, UPDATEINFO } from '@/store/mutations-types';
+import { INCREMENT, DECREMENT, ADDCOUNTE, ADDSTU, ADDSTUTYPE, UPDATEINFO, AUPDATEINFO } from '@/store/mutations-types';
 
 //1.安装插件
 Vue.use(Vuex);
 
 //2.创建对象
+
+const moduleA = {
+    state: {
+        name: '尤因'
+    },
+    getters: {},
+    mutations: {},
+    actions: {}
+};
+
 const store = new Vuex.Store({
     state: {
         counter: 1000,
@@ -40,7 +50,19 @@ const store = new Vuex.Store({
             Vue.delete(state.info, 'age');
         }
     },
-    actions: {},
+    actions: {
+        //提交一个异步方法并在完成后返回信息。
+        [AUPDATEINFO](context, payload) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    context.commit(UPDATEINFO);
+                    console.log(payload);
+                    resolve('通知已提交完成');
+                }, 1000);
+            });
+        }
+    },
+
     getters: {
         powerCounter(state) {
             return state.counter * state.counter;
@@ -57,7 +79,9 @@ const store = new Vuex.Store({
             };
         }
     },
-    modules: {}
+    modules: {
+        a: moduleA
+    }
 });
 
 //导出对象实例

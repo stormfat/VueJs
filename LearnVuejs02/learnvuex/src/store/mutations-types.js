@@ -4,3 +4,4 @@ export const ADDCOUNTE = 'addCounte';
 export const ADDSTU = 'addStu';
 export const ADDSTUTYPE = 'addStuType';
 export const UPDATEINFO = 'updateInfo';
+export const AUPDATEINFO = 'aUpdateInfo';
