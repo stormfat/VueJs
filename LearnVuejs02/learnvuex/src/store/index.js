@@ -11,8 +11,16 @@ const moduleA = {
     state: {
         name: '尤因'
     },
-    getters: {},
-    mutations: {},
+    getters: {
+        changeName(state, getters, rootstate) {
+            return state.name + rootstate.counter;
+        }
+    },
+    mutations: {
+        modulesInfo(state, payload) {
+            state.name = payload;
+        }
+    },
     actions: {}
 };
 

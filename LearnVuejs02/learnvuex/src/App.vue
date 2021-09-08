@@ -1,6 +1,11 @@
 <template>
     <div id="app">
         <h2>{{ message }}</h2>
+        <h2>-------sTORE modules中的内容-----------</h2>
+        <h2>{{ $store.state.a.name }}</h2>
+        <h2>--------Store modules中的mutation方法----------</h2>
+        <button @click="modulesMutationbtn">modules的方法</button>
+
         <h2>{{ $store.state.counter }}</h2>
         <h2>{{ $store.getters.powerCounter }}</h2>
         <h2>{{ $store.getters.more20stusLength }}</h2>
@@ -62,6 +67,9 @@ export default {
                 console.log('数据提交已完成');
                 console.log(res);
             });
+        },
+        modulesMutationbtn() {
+            this.$store.commit('modulesInfo', '赤木');
         }
     }
 };
