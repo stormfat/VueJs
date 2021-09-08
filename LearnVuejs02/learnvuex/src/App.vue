@@ -5,6 +5,8 @@
         <h2>{{ $store.state.a.name }}</h2>
         <h2>--------Store modules中的mutation方法----------</h2>
         <button @click="modulesMutationbtn">modules的方法</button>
+        <h2>------------------store modules中的getters---------</h2>
+        <h2>{{ $store.getters.changeName }}</h2>
 
         <h2>{{ $store.state.counter }}</h2>
         <h2>{{ $store.getters.powerCounter }}</h2>

@@ -31,7 +31,8 @@ const store = new Vuex.Store({
             { id: 1, name: 'kobe', age: 40 },
             { id: 2, name: 'jordan', age: 50 },
             { id: 3, name: "o'neal", age: 40 },
-            { id: 4, name: 'james', age: 41 }
+            { id: 4, name: 'james', age: 41 },
+            { id: 5, name: 'stockton', age: 42 }
         ],
         info: { name: 'gates', sex: 'male', age: 40 }
     },
