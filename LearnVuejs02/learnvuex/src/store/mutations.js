@@ -1,4 +1,5 @@
 import { INCREMENT, DECREMENT, ADDCOUNTE, ADDSTU, ADDSTUTYPE, UPDATEINFO } from '@/store/mutations-types';
+import Vue from 'vue';
 export default {
     [INCREMENT](state) {
         state.counter++;

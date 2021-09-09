@@ -2,34 +2,12 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import mutations from '@/store/mutations';
 import actions from '@/store/actions';
-
+import getters from './getters';
+import moduleA from './modules/moduleA';
 //1.安装插件
 Vue.use(Vuex);
 
 //2.创建对象
-
-const moduleA = {
-    state: {
-        name: '尤因'
-    },
-    getters: {
-        changeName(state, getters, rootstate) {
-            return state.name + rootstate.counter;
-        }
-    },
-    mutations: {
-        modulesInfo(state, payload) {
-            state.name = payload;
-        }
-    },
-    actions: {
-        aUpdateName(context, payload) {
-            setTimeout(() => {
-                context.commit('modulesInfo', payload), 1000;
-            });
-        }
-    }
-};
 
 const state = {
     counter: 1000,
@@ -47,23 +25,7 @@ const store = new Vuex.Store({
     state,
     mutations,
     actions,
-
-    getters: {
-        powerCounter(state) {
-            return state.counter * state.counter;
-        },
-        more20age(state) {
-            return state.students.filter(s => s.age > 40);
-        },
-        more20stusLength(state, getters) {
-            return getters.more20age.length;
-        },
-        moreAgeStus(state) {
-            return age => {
-                return state.students.filter(s => s.age > age);
-            };
-        }
-    },
+    getters,
     modules: {
         a: moduleA
     }
