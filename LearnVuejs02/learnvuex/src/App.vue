@@ -23,6 +23,7 @@
         <button @click="addStuType">mutation特殊方法添加学生</button>
         <button @click="updateInfo">更新信息</button>
         <button @click="asyncUpdateInfo">异步更新信息</button>
+        <button @click="asyncModulesInfo">异步模块更新信息</button>
         <hellow-vuex />
         <router-view />
     </div>
@@ -72,6 +73,9 @@ export default {
         },
         modulesMutationbtn() {
             this.$store.commit('modulesInfo', '赤木');
+        },
+        asyncModulesInfo() {
+            this.$store.dispatch('aUpdateName', '宫城良田');
         }
     }
 };
