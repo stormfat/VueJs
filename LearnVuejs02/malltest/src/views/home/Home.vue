@@ -78,22 +78,52 @@ import HomeSwiper from 'views/home/childComps/HomeSwiper';
 import RecommendView from 'views/home/childComps/RecommendView';
 import FeatureView from './childComps/FeatureView.vue';
 
-import { getHomeMultidata } from 'network/home';
+import { getHomeMultidata, getHomeGoods } from 'network/home';
+
+const POP = 'pop';
+const NEW = 'news';
+const SELL = 'sell';
 
 export default {
     name: 'Home',
     data() {
-        return { banners: [], recommends: [], titles: ['流行', '新款', '精选'] };
+        return {
+            banners: [],
+            recommends: [],
+            titles: ['流行', '新款', '精选'],
+            goods: {
+                pop: { page: 0, list: [] },
+                news: { page: 0, list: [] },
+                sell: { page: 0, list: [] }
+            }
+        };
     },
-    methods: {},
-    components: { NavBar, HomeSwiper, RecommendView, FeatureView, TabControl },
     created() {
-        //1.请求多个数据
-        getHomeMultidata().then(res => {
-            this.banners = res.data.banner.list;
-            this.recommends = res.data.recommend.list;
-        });
-    }
+        this.getMultidata();
+        this.getGoods(POP);
+        this.getGoods(NEW);
+        this.getGoods(SELL);
+    },
+    methods: {
+        getMultidata() {
+            //1.请求多个数据
+            getHomeMultidata().then(res => {
+                this.banners = res.data.banner.list;
+                this.recommends = res.data.recommend.list;
+            });
+        },
+        getGoods(type) {
+            let page = this.goods[type].page + 2;
+            getHomeGoods(type, page).then(res => {
+                console.log(res);
+                this.goods[type].page += 1;
+
+                //将res.data.list数组中的所有元素放到goods.list中
+                this.goods[type].list.push(...res.data.list);
+            });
+        }
+    },
+    components: { NavBar, HomeSwiper, RecommendView, FeatureView, TabControl }
 };
 </script>
 
