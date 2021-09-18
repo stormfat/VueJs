@@ -12,7 +12,7 @@ export default {
         return {};
     },
     props: {},
-    methods: {}
+    methods: {},
 };
 </script>
 
