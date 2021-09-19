@@ -26,21 +26,16 @@
         <back-top @click.native="backClick" v-show="flag" />
     </div>
 </template>
-
 <script>
 import NavBar from 'components/common/navbar/NavBar';
-
 import BsScroll from '../../components/common/bsscroll/BsScroll';
 import HomeSwiper from 'views/home/childComps/HomeSwiper';
 import RecommendView from 'views/home/childComps/RecommendView';
 import FeatureView from './childComps/FeatureView.vue';
 import GoodsList from 'components/content/goods/GoodsList';
-
 import TabControl from 'components/content/tabcontrol/TabControl';
 import BackTop from 'components/content/backtop/BackTop';
-
 import { getHomeMultidata, getHomeGoods } from 'network/home';
-
 export default {
     name: 'Home',
     data() {
@@ -53,9 +48,18 @@ export default {
             recommends: [],
             titles: ['流行', '新款', '精选'],
             goods: {
-                pop: { page: 1, list: [] },
-                new: { page: 1, list: [] },
-                sell: { page: 1, list: [] }
+                pop: {
+                    page: 1,
+                    list: []
+                },
+                new: {
+                    page: 1,
+                    list: []
+                },
+                sell: {
+                    page: 1,
+                    list: []
+                }
             }
         };
     },
@@ -65,7 +69,6 @@ export default {
         this.getGoods('new');
         this.getGoods('sell');
     },
-
     methods: {
         //#region 事件监听相关
         tabClick(index) {
@@ -83,27 +86,22 @@ export default {
             this.$refs.tabControl1.currentIndex = index;
             this.$refs.tabControl2.currentIndex = index;
         },
-
         backClick() {
             this.$refs.scroll.ScrollBy(0, 0);
         },
-
         getPosition(position) {
             //判断BackTop是否显示
             this.flag = position.y < -1000 ? true : false;
             //决定tabControl是否显示
             this.tabFlag = Math.abs(position.y) > this.tabOffsetTop ? true : false;
         },
-
         PullLoad() {
             this.getGoods(this.currentType);
         },
-
         imageFinished() {
             this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop;
         },
         //#endregion
-
         //#region 网络请求相关
         getMultidata() {
             //1.请求多个数据
@@ -115,7 +113,6 @@ export default {
         getGoods(type) {
             getHomeGoods(type, this.goods[type].page).then(res => {
                 //console.log(res.data.list);
-
                 //将res.data.list数组中的所有元素放到goods.list中
                 this.goods[type].list.push(...res.data.list);
                 this.goods[type].page += 1;
@@ -124,13 +121,12 @@ export default {
         }
         //#endregion
     },
-
-    activated: function() {
-        this.$refs.hSwiper.startTimer();
-    },
-    deactivated: function() {
-        this.$refs.hSwiper.stopTimer();
-    },
+    // activated: function() {
+    //     this.$refs.hSwiper.startTimer();
+    // },
+    // deactivated: function() {
+    //     this.$refs.hSwiper.stopTimer();
+    // },
     computed: {
         showGoods() {
             return this.goods[this.currentType].list;
@@ -148,7 +144,6 @@ export default {
     }
 };
 </script>
-
 <style scoped>
 #home {
     /* padding-top: 44px;

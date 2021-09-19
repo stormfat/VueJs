@@ -1,5 +1,5 @@
 <template>
-    <div class="goods-item">
+    <div class="goods-item" @click="itemClick">
         <img :src="goodsItem.show.img" alt="" />
         <div class="goods-info">
             <p>{{ goodsItem.title }}</p>
@@ -10,12 +10,17 @@
 </template>
 
 <script>
+//import Detail from 'views/detail/Detail'
 export default {
     name: 'GoodsListItem',
     data() {
         return {};
     },
-    methods: {},
+    methods: {
+        itemClick() {
+            this.$router.push('/detail/' + this.goodsItem.iid);
+        }
+    },
     props: {
         goodsItem: {
             type: Object,

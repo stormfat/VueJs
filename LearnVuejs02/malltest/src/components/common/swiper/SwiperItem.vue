@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'slide',
+    name: 'Slide',
     data() {
         return {};
     },
