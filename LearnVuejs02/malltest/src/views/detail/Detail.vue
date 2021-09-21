@@ -50,7 +50,7 @@ export default {
             commentInfo: {}
         };
     },
-    methods: {},
+
     created() {
         this.iid = this.$route.params.iid;
         this._getDetail(this.iid);
