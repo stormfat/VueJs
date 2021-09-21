@@ -17,20 +17,24 @@ export default {
         finishedPull() {
             this.scroll.finishPullUp();
         },
+        scrollToel(el, offsetX, offsetY, time = 300) {
+            this.scroll.scrollToElement(el, offsetX, offsetY, time);
+        }
     },
     mounted() {
         this.scroll = new BSscroll(this.$refs.wrapper, {
             click: true,
             observeImage: true,
             probeType: this.probeType,
-            pullUpLoad: this.pullUpLoad,
+            pullUpLoad: this.pullUpLoad
         });
 
         this.scroll.scrollTo(0, 0);
         //监听滚动的位置并发回到父组件
         if (this.probeType == 2 || this.probeType == 3) {
-            this.scroll.on('scroll', (position) => {
+            this.scroll.on('scroll', position => {
                 this.$emit('returnPosition', position);
+                //console.log(position.y);
             });
         }
 
@@ -44,13 +48,13 @@ export default {
     props: {
         probeType: {
             type: Number,
-            default: 0,
+            default: 0
         },
         pullUpLoad: {
             type: Boolean,
-            default: false,
-        },
-    },
+            default: false
+        }
+    }
 };
 </script>
 

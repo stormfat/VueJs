@@ -1,4 +1,5 @@
 <template>
+    <!--当goods实例存在时,块中的内容进行渲染-->
     <div v-if="Object.keys(goods).length !== 0" class="base-info">
         <!--标题块-->
         <div class="info-title">{{ goods.title }}</div>
@@ -6,7 +7,8 @@
         <div class="info-price">
             <span class="n-price">{{ goods.newPrice }}</span>
             <span class="o-price">{{ goods.oldPrice }}</span>
-            <span class="discount">{{ goods.discount }}</span>
+            <!--当没有折扣价时不显示占位-->
+            <span class="discount" v-show="goods.discount.trim() != ''">{{ goods.discount }}</span>
         </div>
         <!--其它信息块-->
         <div class="info-other">
@@ -29,7 +31,10 @@ export default {
     name: 'DetailBaseInfo',
     props: {
         goods: {
-            type: Object
+            type: Object,
+            default() {
+                return {};
+            }
         }
     }
 };

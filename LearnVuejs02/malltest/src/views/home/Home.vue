@@ -19,7 +19,7 @@
                 <recommend-view :recommends="recommends" />
                 <feature-view />
                 <tab-control :titles="titles" @tabClick="tabClick" ref="tabControl2" />
-                <goods-list :goods="showGoods" />
+                <goods-list :goods="showGoods" ref="goods" />
             </div>
         </bs-scroll>
         <!-- .native使组件支持标签的原生方法 -->
@@ -40,6 +40,7 @@ export default {
     name: 'Home',
     data() {
         return {
+            goodPointY: 0,
             flag: false, //判断是否显示返回顶部图标
             currentType: 'pop',
             tabOffsetTop: 0, //设置TabControl组件顶部偏移量
@@ -72,15 +73,20 @@ export default {
     methods: {
         //#region 事件监听相关
         tabClick(index) {
+            this.goodPointY = this.$refs.goods.$el.offsetTop;
             switch (index) {
                 case 0:
                     this.currentType = 'pop';
+                    this.$refs.scroll.ScrollBy(0, -this.goodPointY);
                     break;
                 case 1:
                     this.currentType = 'new';
+                    this.$refs.scroll.ScrollBy(0, -this.goodPointY);
                     break;
                 case 2:
                     this.currentType = 'sell';
+                    this.$refs.scroll.ScrollBy(0, -this.goodPointY);
+                    break;
             }
             //让两个tabControl组件的当前选中项保持一致
             this.$refs.tabControl1.currentIndex = index;
