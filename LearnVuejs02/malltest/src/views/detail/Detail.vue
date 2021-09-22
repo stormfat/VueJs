@@ -12,6 +12,7 @@
                 <detail-recommend-info :recommend-list="recommendList" class="recommendlist" ref="recommend" />
             </div>
         </bs-scroll>
+        <detail-bottom-bar/>
     </div>
 </template>
 
@@ -26,6 +27,7 @@ import DetailGoodsInfo from './childComps/DetailGoodsInfo';
 import DetailParamInfo from './childComps/DetailParamInfo';
 import DetailCommentInfo from './childComps/DetailCommentInfo';
 import DetailRecommendInfo from './childComps/DetailRecommendInfo';
+import DetailBottomBar from './childComps/DetailBottomBar'
 
 import { getDetail, GoodsInfo, Shop, GoodsParam, getRecommend } from 'network/detail';
 
@@ -65,6 +67,7 @@ export default {
         DetailParamInfo,
         DetailCommentInfo,
         DetailRecommendInfo,
+        DetailBottomBar,
         BsScroll
     },
     props: {
