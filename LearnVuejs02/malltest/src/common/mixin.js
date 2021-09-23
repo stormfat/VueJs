@@ -1,16 +1,34 @@
-import { debouce } from './utils';
+// import { debouce } from './utils';
 
-export const itemListenerMixin = {
+// export const itemListenerMixin = {
+//     data() {
+//         return {
+//             itemImgListener: null,
+//             newRefresh: null
+//         };
+//     },
+//     mounted() {
+//         this.newRefresh = debouce(this.$ref.scroll.refress, 100);
+//         this.itemImgListener = () => {
+//             this.newRefresh();
+//         };
+//     }
+// };
+
+import BackTop from 'components/content/backtop/BackTop';
+
+export const backToTop = {
     data() {
         return {
-            itemImgListener: null,
-            newRefresh: null
+            flag: false
         };
     },
-    mounted() {
-        this.newRefresh = debouce(this.$ref.scroll.refress, 100);
-        this.itemImgListener = () => {
-            this.newRefresh();
-        };
+    methods: {
+        backClick() {
+            this.$refs.scroll.ScrollBy(0, 0);
+        }
+    },
+    components: {
+        BackTop
     }
 };

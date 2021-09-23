@@ -12,7 +12,8 @@
                 <detail-recommend-info :recommend-list="recommendList" class="recommendlist" ref="recommend" />
             </div>
         </bs-scroll>
-        <detail-bottom-bar/>
+        <detail-bottom-bar @addToCart="_addToCart" />
+        <back-top @click.native="backClick" v-show="flag" />
     </div>
 </template>
 
@@ -27,9 +28,10 @@ import DetailGoodsInfo from './childComps/DetailGoodsInfo';
 import DetailParamInfo from './childComps/DetailParamInfo';
 import DetailCommentInfo from './childComps/DetailCommentInfo';
 import DetailRecommendInfo from './childComps/DetailRecommendInfo';
-import DetailBottomBar from './childComps/DetailBottomBar'
+import DetailBottomBar from './childComps/DetailBottomBar';
 
 import { getDetail, GoodsInfo, Shop, GoodsParam, getRecommend } from 'network/detail';
+import { backToTop } from '../../common/mixin';
 
 export default {
     name: 'Detail',
@@ -70,6 +72,8 @@ export default {
         DetailBottomBar,
         BsScroll
     },
+    //混入返回顶部的方法
+    mixins: [backToTop],
     props: {
         item: {
             type: Object,
@@ -125,6 +129,7 @@ export default {
             }
             //获取当前的Y坐标值
             this.scrollY = position.y;
+            //console.log(this.isBackFlag);
             //得到当前坐标的绝对值
             let pointY = Math.abs(this.scrollY);
             let i = 0; //i为需要传递给nav-bar：index的值。
@@ -144,6 +149,8 @@ export default {
                 i = 3;
             }
             this.$refs.navbar.currentIndex = i;
+            //判断是否需要显示返回顶部
+            this.flag = pointY > 1000 ? true : false;
         },
 
         //点击【参数，评论，推荐】后定位到响应组件
@@ -171,6 +178,14 @@ export default {
                     this.$refs.navbar.currentIndex = 3;
                     break;
             }
+        },
+        _addToCart() {
+       \const order={}
+       order.image=this.topImages[0]
+       order.title=this.goods.title
+       order.desc=this.goods.desc
+       order.price=this.goods.newPrice
+       order.iid=this.iid
         }
     }
 };

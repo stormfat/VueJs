@@ -34,14 +34,14 @@ import RecommendView from 'views/home/childComps/RecommendView';
 import FeatureView from './childComps/FeatureView.vue';
 import GoodsList from 'components/content/goods/GoodsList';
 import TabControl from 'components/content/tabcontrol/TabControl';
-import BackTop from 'components/content/backtop/BackTop';
+
+import { backToTop } from '../../common/mixin';
 import { getHomeMultidata, getHomeGoods } from 'network/home';
 export default {
     name: 'Home',
     data() {
         return {
             goodPointY: 0,
-            flag: false, //判断是否显示返回顶部图标
             currentType: 'pop',
             tabOffsetTop: 0, //设置TabControl组件顶部偏移量
             tabFlag: false, //设置tabcontrol是否显示
@@ -64,6 +64,7 @@ export default {
             }
         };
     },
+    mixins: [backToTop],
     created() {
         this.getMultidata();
         this.getGoods('pop');
@@ -92,9 +93,7 @@ export default {
             this.$refs.tabControl1.currentIndex = index;
             this.$refs.tabControl2.currentIndex = index;
         },
-        backClick() {
-            this.$refs.scroll.ScrollBy(0, 0);
-        },
+
         getPosition(position) {
             //判断BackTop是否显示
             this.flag = position.y < -1000 ? true : false;
@@ -145,8 +144,7 @@ export default {
         FeatureView,
         TabControl,
         GoodsList,
-        BsScroll,
-        BackTop
+        BsScroll
     }
 };
 </script>
