@@ -180,7 +180,7 @@ export default {
             }
         },
         _addToCart() {
-       \const order={}
+       const order={}
        order.image=this.topImages[0]
        order.title=this.goods.title
        order.desc=this.goods.desc
