@@ -153,7 +153,7 @@ export default {
             this.flag = pointY > 1000 ? true : false;
         },
 
-        //点击【参数，评论，推荐】后定位到响应组件
+        //点击【参数，评论，推荐】后定位到响应组件的顶部
         tabClick(index) {
             if (this.offsetFlag) {
                 this._getAllOffsetTop();
