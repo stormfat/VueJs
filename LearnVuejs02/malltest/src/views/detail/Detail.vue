@@ -180,12 +180,16 @@ export default {
             }
         },
         _addToCart() {
-       const order={}
-       order.image=this.topImages[0]
-       order.title=this.goods.title
-       order.desc=this.goods.desc
-       order.price=this.goods.newPrice
-       order.iid=this.iid
+            //获取购物车需要展示的信息
+            const order = {};
+            order.image = this.topImages[0];
+            order.title = this.goods.title;
+            order.desc = this.goods.desc;
+            order.price = this.goods.realPrice;
+            order.iid = this.iid;
+
+            //将商品添加到购物车内
+            this.$store.commit('addCart', order);
         }
     }
 };
