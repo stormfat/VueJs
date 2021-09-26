@@ -1,5 +1,10 @@
-import { createApp } from 'vue';
-import { createStore } from 'vuex';
+
+import {
+    createStore
+} from 'vuex';
+import mutations from './mutations'
+import actions from './actions'
+import getters from './getters'
 
 // 创建一个新的 store 实例
 const store = createStore({
@@ -8,11 +13,9 @@ const store = createStore({
             cartList: []
         };
     },
-    mutations: {
-        addCart(state, payload) {
-            state.cartList.push(payload);
-        }
-    }
+    mutations,
+    getters,
+    actions,
 });
 
 export default store;

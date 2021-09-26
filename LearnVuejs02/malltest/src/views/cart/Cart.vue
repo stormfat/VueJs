@@ -1,21 +1,44 @@
 <template>
     <div class="cart">
-        <nav-bar class="home-nav">
+        <!--å¯¼èˆª-->
+        <nav-bar class="cart-nav">
             <template v-slot:center>
-                ¹ºÎï½Ö
+                è´­ç‰©è½¦({{cartLength}})
             </template>
         </nav-bar>
+        <!--å•†å“åˆ—è¡¨-->
+        <cart-list/>
     </div>
 </template>
 
 <script>
+    import NavBar from 'components/common/navbar/NavBar'
+    import CartList from './childComps/CartList'
+
+    import { mapGetters } from 'vuex'
     export default {
         name: 'Cart',
         data() {
             return {};
         },
-        methods: {}
+        methods: {},
+        components: {
+            NavBar,
+            CartList
+        },
+        computed: {
+            ...mapGetters(['cartLength'])
+        }
     };
 </script>
 
-<style scoped></style>
+<style scoped>
+    .cart{
+        height:100vh
+    }
+    .cart-nav {
+        background-color: var(--color-tint);
+        font-weight: 700;
+        color: white;
+    }
+</style>

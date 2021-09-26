@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Vue from 'vue';
+
 
 const Home = () => import('views/home/Home');
 const Cart = () => import('views/cart/Cart');

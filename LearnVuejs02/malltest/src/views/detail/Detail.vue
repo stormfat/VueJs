@@ -189,7 +189,7 @@ export default {
             order.iid = this.iid;
 
             //将商品添加到购物车内
-            this.$store.commit('addCart', order);
+            this.$store.dispatch('addCart', order);
         }
     }
 };

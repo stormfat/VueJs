@@ -126,12 +126,7 @@ export default {
         }
         //#endregion
     },
-    // activated: function() {
-    //     this.$refs.hSwiper.startTimer();
-    // },
-    // deactivated: function() {
-    //     this.$refs.hSwiper.stopTimer();
-    // },
+    
     computed: {
         showGoods() {
             return this.goods[this.currentType].list;
