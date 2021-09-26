@@ -2,9 +2,7 @@
 
     <bs-scroll class="content">
         <div>
-            <div v-for="item in list">
-                {{item}}
-            </div>
+            <cart-list-item v-for="(item,index) in list" :key="index" :item-info="item" />
         </div>
     </bs-scroll>
 
@@ -13,13 +11,15 @@
 <script>
     import { mapGetters } from 'vuex'
     import BsScroll from 'components/common/bsscroll/BsScroll'
+    import CartListItem from './CartListItem'
     export default {
         name: 'CartList',
         computed: {
             ...mapGetters({ list: 'cartList' })
         },
         components: {
-            BsScroll
+            BsScroll,
+            CartListItem
         }
     }
 
