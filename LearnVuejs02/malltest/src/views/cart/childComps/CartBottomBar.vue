@@ -1,44 +1,101 @@
 <template>
     <div class="bottom-nav">
         <div class="check-area">
-            <check-button class="check-button"/>
+            <check-button class="check-button" @checkBtnClick="allCheck" :is-checked="checkFlag" />
             <span>全选</span>
         </div>
+        <div class="total-price">合计:{{ totalPrice }}</div>
+        <div class="calculate">去计算({{ cartNum }})</div>
     </div>
 </template>
 
 <script>
+import CheckButton from 'components/content/checkButton/CheckButton';
+import { mapGetters } from 'vuex';
 
-    import CheckButton from 'components/content/checkButton/CheckButton'
-
-    export default {
-        name: 'CartButtonBar',
-        
-        components: { CheckButton }
-
-
-
-
+export default {
+    name: 'CartButtonBar',
+    components: { CheckButton },
+    data() {
+        return { checkFlag: false };
+    },
+    computed: {
+        totalPrice() {
+            return (
+                '￥' +
+                //先过滤出所有被选中的商品
+                this.$store.state.cartList
+                    .filter(item => {
+                        return item.checked;
+                    })
+                    //对商品的总价进行汇总
+                    .reduce((preValue, item) => {
+                        return preValue + item.price * item.count;
+                    }, 0)
+                    .toFixed(2)
+            );
+        },
+        cartNum() {
+            return this.$store.state.cartList.filter(item => {
+                return item.checked;
+            }).length;
+        }
+    },
+    methods: {
+        //全选购物车中所有商品
+        allCheck() {
+            if (!this.checkFlag) {
+                for (let item of this.$store.state.cartList) {
+                    item.checked = true;
+                }
+                this.checkFlag = !this.checkFlag;
+            } else {
+                for (let item of this.$store.state.cartList) {
+                    item.checked = false;
+                }
+                this.checkFlag = !this.checkFlag;
+            }
+        }
     }
+};
 </script>
 
 <style scoped>
-    .bottom-nav {
-        height: 40px;
-        position: relative;
-        background-color: red;
-      
-        bottom: 133px
-    }
+.bottom-nav {
+    height: 40px;
+    position: relative;
+    background-color: #eee;
+    bottom: 133px;
+    display: flex;
+}
 
-    .check-area {
-        display: flex;
-        align-items: center
-    }
+.check-area {
+    display: flex;
+    padding: 10px;
+    margin-left: 10px;
+    align-items: center;
+}
 
-    .check-button {
-        width: 20px;
-        height: 20px ;
-        line-height:22px
-    }
+.check-button {
+    flex: 1;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+}
+
+.total-price {
+    height: 40px;
+    padding: 10px;
+    margin-left: 20px;
+    align-items: center;
+}
+
+.calculate {
+    height: 40px;
+    padding: 10px;
+    margin-left: 40px;
+
+    align-items: center;
+    background-color: orange;
+}
 </style>
