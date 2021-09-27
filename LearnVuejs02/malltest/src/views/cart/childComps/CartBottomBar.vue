@@ -32,7 +32,7 @@ export default {
                     .reduce((preValue, item) => {
                         return preValue + item.price * item.count;
                     }, 0)
-                    .toFixed(2)
+                    .toFixed(3)
             );
         },
         cartNum() {
