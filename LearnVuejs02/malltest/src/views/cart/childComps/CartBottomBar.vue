@@ -17,9 +17,12 @@ export default {
     name: 'CartButtonBar',
     components: { CheckButton },
     data() {
-        return { checkFlag: false };
+        return {
+            //checkFlag: false
+        };
     },
     computed: {
+        //计算总价格
         totalPrice() {
             return (
                 '￥' +
@@ -32,13 +35,29 @@ export default {
                     .reduce((preValue, item) => {
                         return preValue + item.price * item.count;
                     }, 0)
-                    .toFixed(3)
+                    .toFixed(2)
             );
         },
+
+        //获取已选择项的个数
         cartNum() {
             return this.$store.state.cartList.filter(item => {
                 return item.checked;
             }).length;
+        },
+
+        //判断全选按钮的状态
+        checkFlag() {
+            if (
+                //如果有商品没有被选择，则将全选按钮置为false
+                this.$store.state.cartList.filter(item => {
+                    return !item.checked;
+                }).length
+            ) {
+                return false;
+            } else {
+                return true;
+            }
         }
     },
     methods: {
@@ -48,13 +67,14 @@ export default {
                 for (let item of this.$store.state.cartList) {
                     item.checked = true;
                 }
-                this.checkFlag = !this.checkFlag;
+                // this.checkFlag = !this.checkFlag;
             } else {
                 for (let item of this.$store.state.cartList) {
                     item.checked = false;
                 }
-                this.checkFlag = !this.checkFlag;
+                //this.checkFlag = !this.checkFlag;
             }
+            this.checkFlag = !this.checkFlag;
         }
     }
 };
