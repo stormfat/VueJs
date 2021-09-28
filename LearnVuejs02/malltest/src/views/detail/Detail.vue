@@ -190,7 +190,7 @@ export default {
 
             //将商品添加到购物车内
             this.$store.dispatch('addCart', order).then(res => {
-                console.log(res);
+                this.$toast.show(res, 2000);
             });
         }
     }

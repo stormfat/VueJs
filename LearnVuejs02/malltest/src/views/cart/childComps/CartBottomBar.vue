@@ -5,7 +5,7 @@
             <span>全选</span>
         </div>
         <div class="total-price">合计:{{ totalPrice }}</div>
-        <div class="calculate">去计算({{ cartNum }})</div>
+        <div class="calculate" @click="calcClick">去计算({{ cartNum }})</div>
     </div>
 </template>
 
@@ -75,6 +75,11 @@ export default {
                 //this.checkFlag = !this.checkFlag;
             }
             this.checkFlag = !this.checkFlag;
+        },
+        calcClick() {
+            if (this.cartNum === 0) {
+                console.log('请选择商品');
+            }
         }
     }
 };
