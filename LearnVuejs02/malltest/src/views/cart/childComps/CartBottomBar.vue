@@ -78,7 +78,7 @@ export default {
         },
         calcClick() {
             if (this.cartNum === 0) {
-                console.log('请选择商品');
+                this.$toast.show('请选择商品', 3000);
             }
         }
     }

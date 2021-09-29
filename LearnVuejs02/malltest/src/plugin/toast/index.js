@@ -1,4 +1,5 @@
 import Toast from './Toast';
+import { createApp } from 'vue';
 // const obj = {};
 
 // obj.install = function(Vue) {
@@ -18,8 +19,17 @@ import Toast from './Toast';
 //     Vue.prototype.$toast = Toast;
 // };
 
-export default {
-    install: (app, options) => {
-        app.component('toast', Toast);
-    }
+const plugin = {};
+plugin.install = function(app) {
+    //1.实例化并绑定组件且将它挂载到div节点
+    const toast = createApp(Toast);
+    const instance = toast.mount(document.createElement('div'));
+
+    //2.将挂载的节点添加到body中
+    document.body.appendChild(instance.$el);
+
+    //定义全局
+    app.config.globalProperties.$toast = instance;
 };
+
+export default plugin;

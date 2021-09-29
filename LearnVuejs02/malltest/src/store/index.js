@@ -1,21 +1,16 @@
-
-import {
-    createStore
-} from 'vuex';
-import mutations from './mutations'
-import actions from './actions'
-import getters from './getters'
+import { createStore } from 'vuex';
+import mutations from './mutations';
+import actions from './actions';
+import getters from './getters';
 
 // 创建一个新的 store 实例
 const store = createStore({
-    state() {
-        return {
-            cartList: []
-        };
+    state: {
+        cartList: []
     },
     mutations,
     getters,
-    actions,
+    actions
 });
 
 export default store;
