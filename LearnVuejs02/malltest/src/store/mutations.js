@@ -8,6 +8,5 @@ export default {
         payload.checked = true;
         state.cartList.push(payload);
         payload.count = 1;
-        console.log('payload:', payload.iid);
     }
 };
