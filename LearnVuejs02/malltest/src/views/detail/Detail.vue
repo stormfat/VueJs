@@ -1,6 +1,6 @@
 <template>
     <div id="detail">
-        <detail-nav-bar class="nav-bar" @clickIndex="tabClick" ref="navbar" @returnPosition="_getNavPosition" />
+        <detail-nav-bar class="nav-bar" @clickIndex="tabClick" ref="navbar" />
         <bs-scroll class="content" ref="scroll" :probe-type="3" @returnPosition="_getScrollY">
             <div>
                 <detail-swiper :top-images="topImages" />
